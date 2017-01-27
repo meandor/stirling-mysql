@@ -1,0 +1,10 @@
+language: php
+php:
+  - '7.0'
+
+sudo: false
+
+before_script:
+  - ./bin/go install
+
+script: ./bin/go test

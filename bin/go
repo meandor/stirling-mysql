@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+SCRIPT_DIR=$(dirname $0)
+
+goal_test() {
+  ${SCRIPT_DIR}/../vendor/bin/phpunit --colors=always ${SCRIPT_DIR}/../tests
+}
+
+function help {
+    echo "usage: $0 <task>
+task can be:
+    help             -- This help message
+    install          -- Installs all dependencies
+    test             -- Runs all tests
+                     -- Anything else accepted by composer
+    "
+}
+
+if [ "$1" == "help" ]; then
+    help
+elif [ "$1" == "test" ]; then
+    goal_test
+else
+    php ${SCRIPT_DIR}/composer.phar $*
+fi

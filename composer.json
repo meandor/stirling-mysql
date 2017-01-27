@@ -1,0 +1,27 @@
+{
+  "name": "meandor/stirling-mysql",
+  "description": "A MySQL wrapper for the sterling-microservice",
+  "type": "library",
+  "homepage": "https://github.com/meandor/stirling-mysql",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Daniel Schruhl",
+      "email": "danielschruhl@gmail.com",
+      "role": "Developer"
+    }
+  ],
+  "version": "0.1.0",
+  "require": {
+    "php": "^7.0",
+    "meandor/stirling-microservice": "0.1.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "5.5.*"
+  },
+  "autoload": {
+    "psr-4": {
+      "StirlingMySQL\\": "src/"
+    }
+  }
+}
