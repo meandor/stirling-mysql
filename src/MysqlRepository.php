@@ -33,7 +33,13 @@ abstract class MysqlRepository implements Repository
 
     public function findOne($key)
     {
-        // TODO: Implement findOne() method.
+        $stmt = $this->link->prepare("SELECT * FROM `" . $this->table . "` WHERE " . $this->key . "=?");
+        $stmt->bind_param("s", $key);
+        $stmt->execute();
+        $stmt->bind_result($result);
+        $stmt->fetch();
+        $stmt->close();
+        return $result;
     }
 
     public function search($constraint)
@@ -43,7 +49,10 @@ abstract class MysqlRepository implements Repository
 
     public function delete($key)
     {
-        // TODO: Implement delete() method.
+        $stmt = $this->link->prepare("DELETE FROM `" . $this->table . "` WHERE " . $this->key . "=?");
+        $stmt->bind_param("s", $key);
+        $stmt->execute();
+        $stmt->close();
     }
 
     public function save($object)

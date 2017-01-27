@@ -1,7 +1,9 @@
 <?php
 namespace StirlingMySQL;
 
+use InvalidArgumentException;
 use mysqli;
+use Stirling\Core\Config;
 use Stirling\Database\Connection;
 
 class MysqlConnection implements Connection
@@ -12,8 +14,15 @@ class MysqlConnection implements Connection
 
     private function __construct()
     {
-        $config = json_decode(file_get_contents("./db.json"), true);
-        $this->dbLink = new mysqli($config["host"], $config["user"], $config["password"], $config["database"]);
+        $config = Config::instance();
+        try {
+            $this->dbLink = new mysqli($config->dbHost, $config->dbUser, $config->dbPassword, $config->dbName);
+        } catch (InvalidArgumentException $e) {
+            error_log($e->getMessage());
+            error_log("Using default database config values");
+            $this->dbLink = new mysqli("127.0.0.1", "root", "", "database");
+        }
+
         if ($this->dbLink->connect_errno) {
             $err = "Error: Failed to make a MySQL connection, here is why: \n";
             $err .= "Errno: " . $this->dbLink->connect_errno . "\n";
