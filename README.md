@@ -7,6 +7,7 @@
 [![Daily Downloads](https://poser.pugx.org/meandor/stirling-microservice/d/daily)](https://packagist.org/packages/meandor/stirling-microservice)
 [![composer.lock](https://poser.pugx.org/meandor/stirling-microservice/composerlock)](https://packagist.org/packages/meandor/stirling-microservice)
 [![Build Status](https://travis-ci.org/meandor/stirling-mysql.svg?branch=master)](https://travis-ci.org/meandor/stirling-mysql)
+
 A MySQL Database wrapper for the [stirling-microservice](https://github.com/meandor/stirling-microservice)
 
 This library uses mysqli for database access. Please make sure you have
