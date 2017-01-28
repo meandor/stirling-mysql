@@ -11,10 +11,10 @@
       "role": "Developer"
     }
   ],
-  "version": "0.1.0",
+  "version": "0.1.4",
   "require": {
     "php": "^7.0",
-    "meandor/stirling-microservice": "0.1.2"
+    "meandor/stirling-microservice": "0.1.4"
   },
   "require-dev": {
     "phpunit/phpunit": "5.5.*"

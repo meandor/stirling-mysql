@@ -3,10 +3,10 @@ namespace StirlingMySQL;
 
 use InvalidArgumentException;
 use mysqli;
-use Stirling\Core\Config;
-use Stirling\Database\Connection;
+use \Stirling\Core\Config;
+use \Stirling\Database\IConnection;
 
-class MysqlConnection implements Connection
+class Connection implements IConnection
 {
 
     private static $connection;
@@ -32,10 +32,10 @@ class MysqlConnection implements Connection
         }
     }
 
-    public static function Instance()
+    public static function Instance(): IConnection
     {
         if (self::$connection == null) {
-            self::$connection = new MysqlConnection();
+            self::$connection = new Connection();
         }
 
         return self::$connection;
