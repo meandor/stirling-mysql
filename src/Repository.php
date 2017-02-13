@@ -52,7 +52,7 @@ abstract class Repository implements IRepository
         return $entities;
     }
 
-    public function findOne($keyValue): IEntity
+    public function findOne($keyValue): ?IEntity
     {
         $stmt = $this->link->prepare("SELECT * FROM `" . $this->table . "` WHERE " . $this->key . "=?");
         $stmt->bind_param($this->keyType, $keyValue);
@@ -72,7 +72,7 @@ abstract class Repository implements IRepository
         return $result;
     }
 
-    public function save(IEntity $entity): IEntity
+    public function save(IEntity $entity): ?IEntity
     {
         $keySpace = $this->transformKeySpace(array_keys($entity->getProperties()));
         $values = $this->transformKeyValues(array_values($entity->getProperties()));
