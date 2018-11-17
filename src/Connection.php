@@ -1,10 +1,11 @@
 <?php
+
 namespace StirlingMySQL;
 
 use InvalidArgumentException;
 use mysqli;
-use \Stirling\Core\Config;
-use \Stirling\Database\IConnection;
+use Stirling\Core\Config;
+use Stirling\Database\IConnection;
 
 class Connection implements IConnection
 {
@@ -16,11 +17,11 @@ class Connection implements IConnection
     {
         $config = Config::instance();
         try {
-            $this->dbLink = new mysqli($config->dbHost, $config->dbUser, $config->dbPassword, $config->dbName, $config->port);
+            $this->dbLink = new mysqli($config->dbHost, $config->dbUser, $config->dbPassword, $config->dbName, $config->dbPort);
         } catch (InvalidArgumentException $e) {
             error_log($e->getMessage());
             error_log("Using default database config values");
-            $this->dbLink = new mysqli("127.0.0.1", "root", "", "database");
+            $this->dbLink = new mysqli("127.0.0.1", "root", "", "database", 3306);
         }
 
         if ($this->dbLink->connect_errno) {

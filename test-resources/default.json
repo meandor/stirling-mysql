@@ -3,5 +3,5 @@
   "dbUser": "root",
   "dbPassword": "my-secret-pw",
   "dbName": "test",
-  "port": 3306
+  "dbPort": 3306
 }

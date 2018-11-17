@@ -25,7 +25,8 @@ If you don't specify a config json (default.json) for your Config class
     "dbHost": "<ip address>",
     "dbUser": "<my username>",
     "dbPassword": "<my password>",
-    "dbName": "<my database name>"
+    "dbName": "<my database name>",
+    "dbPort": <port>
 }
 ````
 
@@ -38,7 +39,8 @@ The default is:
     "dbHost": "127.0.0.1",
     "dbUser": "root",
     "dbPassword": "",
-    "dbName": "database"
+    "dbName": "database",
+    "dbPort": 3306
 }
 ````
 
