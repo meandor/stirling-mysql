@@ -1,8 +1,9 @@
 <?php
+
 namespace StirlingMySQL;
 
-use \Stirling\Database\IRepository;
-use \Stirling\Database\IEntity;
+use Stirling\Database\IEntity;
+use Stirling\Database\IRepository;
 
 abstract class Repository implements IRepository
 {
@@ -57,10 +58,13 @@ abstract class Repository implements IRepository
         $stmt = $this->link->prepare("SELECT * FROM `" . $this->table . "` WHERE " . $this->key . "=?");
         $stmt->bind_param($this->keyType, $keyValue);
         $stmt->execute();
-        $stmt->bind_result($result);
-        $stmt->fetch();
+        $result = $stmt->get_result();
+        if ($result->num_rows === 0) {
+            return null;
+        }
+        $row = $result->fetch_assoc();
         $stmt->close();
-        return $this->dataMapper->createEntity($result);
+        return $this->dataMapper->createEntity($row);
     }
 
     public function delete(IEntity $entity): bool
