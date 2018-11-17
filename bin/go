@@ -3,7 +3,7 @@ SCRIPT_DIR=$(dirname $0)
 
 goal_db_server() {
   docker rm -f some-mysql
-  docker run --name some-mysql -e MYSQL_ROOT_PASSWORD="" -e MYSQL_DATABASE=test -p 3306:3306 -d mysql:5
+  docker run --name some-mysql -e MYSQL_ALLOW_EMPTY_PASSWORD="yes" -e MYSQL_DATABASE=test -p 3306:3306 -d mysql:5
 }
 
 goal_test() {
