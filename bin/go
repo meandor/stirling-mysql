@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 SCRIPT_DIR=$(dirname $0)
 
+goal_db_server() {
+  docker rm -f some-mysql
+  docker run --name some-mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw -e MYSQL_DATABASE=test -p 3306:3306 -d mysql:5
+}
+
 goal_test() {
   ${SCRIPT_DIR}/../vendor/bin/phpunit --colors=always ${SCRIPT_DIR}/../tests
 }
@@ -11,12 +16,15 @@ task can be:
     help             -- This help message
     install          -- Installs all dependencies
     test             -- Runs all tests
+    server           -- Starts MySQL server
                      -- Anything else accepted by composer
     "
 }
 
 if [ "$1" == "help" ]; then
     help
+elif [ "$1" == "server" ]; then
+    goal_db_server
 elif [ "$1" == "test" ]; then
     goal_test
 else
