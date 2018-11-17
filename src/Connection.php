@@ -16,7 +16,7 @@ class Connection implements IConnection
     {
         $config = Config::instance();
         try {
-            $this->dbLink = new mysqli($config->dbHost, $config->dbUser, $config->dbPassword, $config->dbName);
+            $this->dbLink = new mysqli($config->dbHost, $config->dbUser, $config->dbPassword, $config->dbName, $config->port);
         } catch (InvalidArgumentException $e) {
             error_log($e->getMessage());
             error_log("Using default database config values");
