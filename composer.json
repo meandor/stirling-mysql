@@ -11,7 +11,7 @@
       "role": "Developer"
     }
   ],
-  "version": "0.1.7-SNAPSHOT",
+  "version": "0.1.7",
   "require": {
     "php": "^7.0",
     "meandor/stirling-microservice": "0.1.5",

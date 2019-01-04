@@ -1,7 +1,8 @@
 <?php
+
 namespace StirlingMySQL;
 
-use \Stirling\Database\IEntity;
+use Stirling\Database\IEntity;
 
 abstract class Entity implements IEntity
 {
@@ -39,5 +40,14 @@ abstract class Entity implements IEntity
     public function getProperties()
     {
         return $this->properties;
+    }
+
+    public function __isset($key)
+    {
+        if (isset($this->getProperties()[$key])) {
+            return (false === empty($this->getProperties()[$key]));
+        } else {
+            return null;
+        }
     }
 }
