@@ -92,7 +92,7 @@ abstract class Repository implements IRepository
     {
         $result = "(";
         foreach ($keySpace as $key) {
-            $result .= $key . ",";
+            $result .= "`" . $key . "`,";
         }
         $result = rtrim($result, ",");
         $result .= ")";
