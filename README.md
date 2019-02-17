@@ -1,11 +1,11 @@
 # Stirling MySQL
-[![Latest Stable Version](https://poser.pugx.org/meandor/stirling-microservice/v/stable)](https://packagist.org/packages/meandor/stirling-microservice)
-[![Total Downloads](https://poser.pugx.org/meandor/stirling-microservice/downloads)](https://packagist.org/packages/meandor/stirling-microservice)
-[![Latest Unstable Version](https://poser.pugx.org/meandor/stirling-microservice/v/unstable)](https://packagist.org/packages/meandor/stirling-microservice)
-[![License](https://poser.pugx.org/meandor/stirling-microservice/license)](https://packagist.org/packages/meandor/stirling-microservice)
-[![Monthly Downloads](https://poser.pugx.org/meandor/stirling-microservice/d/monthly)](https://packagist.org/packages/meandor/stirling-microservice)
-[![Daily Downloads](https://poser.pugx.org/meandor/stirling-microservice/d/daily)](https://packagist.org/packages/meandor/stirling-microservice)
-[![composer.lock](https://poser.pugx.org/meandor/stirling-microservice/composerlock)](https://packagist.org/packages/meandor/stirling-microservice)
+[![Latest Stable Version](https://poser.pugx.org/meandor/stirling-mysql/v/stable)](https://packagist.org/packages/meandor/stirling-mysql)
+[![Total Downloads](https://poser.pugx.org/meandor/stirling-mysql/downloads)](https://packagist.org/packages/meandor/stirling-mysql)
+[![Latest Unstable Version](https://poser.pugx.org/meandor/stirling-mysql/v/unstable)](https://packagist.org/packages/meandor/stirling-mysql)
+[![License](https://poser.pugx.org/meandor/stirling-mysql/license)](https://packagist.org/packages/meandor/stirling-mysql)
+[![Monthly Downloads](https://poser.pugx.org/meandor/stirling-mysql/d/monthly)](https://packagist.org/packages/meandor/stirling-mysql)
+[![Daily Downloads](https://poser.pugx.org/meandor/stirling-mysql/d/daily)](https://packagist.org/packages/meandor/stirling-mysql)
+[![composer.lock](https://poser.pugx.org/meandor/stirling-mysql/composerlock)](https://packagist.org/packages/meandor/stirling-mysql)
 [![Build Status](https://travis-ci.org/meandor/stirling-mysql.svg?branch=master)](https://travis-ci.org/meandor/stirling-mysql)
 
 A MySQL Database wrapper for the [stirling-microservice](https://github.com/meandor/stirling-microservice)
