@@ -81,8 +81,13 @@ abstract class Repository implements IRepository
         $keySpace = $this->transformKeySpace(array_keys($entity->getProperties()));
         $values = $this->transformKeyValues(array_values($entity->getProperties()));
         $sql = "INSERT INTO " . $this->table . " " . $keySpace . " VALUES " . $values;
-        if ($this->link->query($sql) === TRUE) {
-            return $this->findOne($this->link->insert_id);
+        if ($this->link->query($sql)) {
+            if (!empty($entity->getKey())) {
+                $insertedId = $entity->getKey();
+            } else {
+                $insertedId = $this->link->insert_id;
+            }
+            return $this->findOne($insertedId);
         } else {
             return null;
         }
