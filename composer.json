@@ -11,10 +11,10 @@
       "role": "Developer"
     }
   ],
-  "version": "0.1.9",
+  "version": "0.1.11",
   "require": {
     "php": "^7.0",
-    "meandor/stirling-microservice": "0.1.6",
+    "meandor/stirling-microservice": "0.*",
     "ext-mysqli": "^7.1"
   },
   "require-dev": {
