@@ -114,4 +114,59 @@ abstract class Repository implements IRepository
         $result .= ")";
         return $result;
     }
+
+    private function updateAllPropertiesSubQuery($properties)
+    {
+        $query = "  ";
+        foreach ($properties as $key => $value) {
+            $query .= "`".$key . "`=?, ";
+        }
+        return substr($query, 0, -2);
+    }
+
+    private function values($properties)
+    {
+        $result = array();
+        foreach ($properties as $key => $value) {
+            array_push($result, $value);
+        }
+        return $result;
+    }
+
+    private function getDatatypes($properties)
+    {
+        $result = "";
+        foreach ($properties as $key => $value) {
+            $result .= "s";
+        }
+        return $result;
+    }
+
+    /**
+     * @param $entity IEntity
+     * @return bool true if entity was updated
+     */
+    public function update($entity)
+    {
+        $propertiesSubQuery = $this->updateAllPropertiesSubQuery($entity->getProperties());
+        $values = $this->values($entity->getProperties());
+        $sql = "UPDATE " . $this->table . " SET " . $propertiesSubQuery . " WHERE id=?";
+        $preparedStatement = $this->link->prepare($sql);
+        if ($preparedStatement) {
+            $entityId = $entity->getKey();
+            $dataTypes = $this->getDatatypes($values) . 'i';
+            $valueSpaceWithEntityId = array_merge($values, [$entityId]);
+
+            $preparedStatement->bind_param($dataTypes, ...$valueSpaceWithEntityId);
+            $isUpdated = $preparedStatement->execute();
+
+            if (!$isUpdated) {
+                error_log($preparedStatement->error);
+            }
+            return $isUpdated;
+        } else {
+            error_log($this->link->error);
+            return false;
+        }
+    }
 }
