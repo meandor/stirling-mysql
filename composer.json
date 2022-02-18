@@ -11,14 +11,14 @@
       "role": "Developer"
     }
   ],
-  "version": "0.2.0",
+  "version": "0.2.1",
   "require": {
-    "php": "^7.0",
-    "meandor/stirling-microservice": "0.*",
-    "ext-mysqli": "^7.1"
+    "php": ">=7.0",
+    "meandor/stirling-microservice": "*",
+    "ext-mysqli": ">=7.0"
   },
   "require-dev": {
-    "phpunit/phpunit": "5.5.*"
+    "phpunit/phpunit": "*"
   },
   "autoload": {
     "psr-4": {
