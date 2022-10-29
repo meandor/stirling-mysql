@@ -11,7 +11,7 @@ class RepositoryIntegrationTest extends TestCase
     private $testRepository;
     private $connection;
 
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         Config::instance("test-resources/default.json");
         $db = Connection::Instance()->getDbLink();
@@ -19,13 +19,13 @@ class RepositoryIntegrationTest extends TestCase
         mysqli_query($db, $sql);
     }
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->connection = Connection::Instance();
         $this->testRepository = new TestRepository();
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $sql = "TRUNCATE TABLE test";
         mysqli_query($this->connection->getDbLink(), $sql);
