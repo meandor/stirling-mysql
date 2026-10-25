@@ -9,7 +9,6 @@ use Stirling\Database\IConnection;
 
 class Connection implements IConnection
 {
-
     private static $connection;
     private $dbLink;
 

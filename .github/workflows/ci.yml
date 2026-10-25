@@ -1,0 +1,143 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        php: ['8.4', '8.5']
+    env:
+      GITHUB_TOKEN: ""
+    services:
+      mysql:
+        image: mysql:8.4
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+          MYSQL_ROOT_HOST: "%"
+          MYSQL_DATABASE: test
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping --silent"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: json,mysqli
+          coverage: none
+
+      - name: Install dependencies
+        run: ./bin/go install
+
+      - name: Run tests
+        run: ./bin/go test
+
+  static-analysis:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ""
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: json,mysqli
+          coverage: none
+
+      - name: Install dependencies
+        run: ./bin/go install
+
+      - name: PHPStan
+        run: ./bin/go static-analysis
+
+  complexity:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ""
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: json,mysqli
+          coverage: none
+
+      - name: Install dependencies
+        run: ./bin/go install
+
+      - name: PHPMD Cyclomatic Complexity
+        run: ./bin/go complexity
+
+  lint:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ""
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: json,mysqli
+          coverage: none
+
+      - name: Install dependencies
+        run: ./bin/go install
+
+      - name: Check code style
+        run: ./bin/go lint-check
+
+  mutation-testing:
+    needs: test
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ""
+    services:
+      mysql:
+        image: mysql:8.4
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+          MYSQL_ROOT_HOST: "%"
+          MYSQL_DATABASE: test
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping --silent"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: json,mysqli,xdebug
+          coverage: xdebug
+
+      - name: Install dependencies
+        run: ./bin/go install
+
+      - name: Run Mutation Testing
+        run: ./bin/go mutation-check
+
+  security:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Security scan (Trivy)
+        run: ./bin/go security-check

@@ -27,7 +27,7 @@ abstract class Entity implements IEntity
         }
     }
 
-    function __set($name, $value)
+    public function __set($name, $value)
     {
         if (key_exists($name, $this->properties)) {
             $this->properties[$name] = $value;
@@ -47,7 +47,7 @@ abstract class Entity implements IEntity
         if (isset($this->getProperties()[$key])) {
             return (false === empty($this->getProperties()[$key]));
         } else {
-            return null;
+            return false;
         }
     }
 }

@@ -7,7 +7,6 @@ use Stirling\Database\IRepository;
 
 abstract class Repository implements IRepository
 {
-
     protected $key;
 
     /**
@@ -43,7 +42,7 @@ abstract class Repository implements IRepository
 
     public function fetchAll(): array
     {
-        $entities = array();
+        $entities = [];
         $query = "SELECT * FROM `" . $this->table . "`";
         $res = $this->link->query($query);
 
@@ -119,14 +118,14 @@ abstract class Repository implements IRepository
     {
         $query = "  ";
         foreach ($properties as $key => $value) {
-            $query .= "`".$key . "`=?, ";
+            $query .= "`" . $key . "`=?, ";
         }
         return substr($query, 0, -2);
     }
 
     private function values($properties)
     {
-        $result = array();
+        $result = [];
         foreach ($properties as $key => $value) {
             array_push($result, $value);
         }

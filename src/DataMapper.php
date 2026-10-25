@@ -1,13 +1,12 @@
 <?php
+
 namespace StirlingMySQL;
 
-
-use \Stirling\Database\IDataMapper;
-use \Stirling\Database\IEntity;
+use Stirling\Database\IDataMapper;
+use Stirling\Database\IEntity;
 
 class DataMapper implements IDataMapper
 {
-
     private $entityClassName;
 
     /**
@@ -25,7 +24,7 @@ class DataMapper implements IDataMapper
      * @param $dbData array raw data from the database
      * @return IEntity
      */
-    function createEntity(array $dbData): IEntity
+    public function createEntity(array $dbData): IEntity
     {
         return new $this->entityClassName($dbData);
     }

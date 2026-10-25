@@ -15,7 +15,8 @@ class RepositoryIntegrationTest extends TestCase
     {
         Config::instance("test-resources/default.json");
         $db = Connection::Instance()->getDbLink();
-        $sql = "CREATE TABLE test (id INT(11), foo VARCHAR(100))";
+        mysqli_query($db, "DROP TABLE IF EXISTS test");
+        $sql = "CREATE TABLE test (foo VARCHAR(100), id INT(11))";
         mysqli_query($db, $sql);
     }
 
@@ -33,9 +34,21 @@ class RepositoryIntegrationTest extends TestCase
 
     public function testInsert()
     {
-        $entity = new TestEntity(array("id" => 0, "foo" => "bar"));
+        $entity = new TestEntity(["id" => 0, "foo" => "bar"]);
         $savedEntity = $this->testRepository->save($entity);
         $this->assertEquals($entity, $savedEntity);
+    }
+
+    public function testInsertWithExplicitKey()
+    {
+        $entity = new TestEntity(["id" => 42, "foo" => "bar"]);
+        $savedEntity = $this->testRepository->save($entity);
+        $this->assertEquals($entity, $savedEntity);
+    }
+
+    public function testFindOneReturnsNullForUnknownKey()
+    {
+        $this->assertNull($this->testRepository->findOne(999));
     }
 
 }
