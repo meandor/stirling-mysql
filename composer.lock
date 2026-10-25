@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d8315e026ef1fb860d56bc78e29d4156",
+    "content-hash": "791f93f1f154f2beb80a9df9a21e99c1",
     "packages": [
         {
             "name": "meandor/stirling-microservice",
